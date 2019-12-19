@@ -17,21 +17,23 @@ export default class MovieList extends Component {
       .catch(err => console.log(err.response));
   }
 
+
   render() {
     return (
       <div className="movie-list">
         {this.state.movies.map(movie => (
-          <MovieDetails key={movie.id} movie={movie} />
+          <MovieDetails {...this.props} key={movie.id} movie={movie} updateStuffs={this.updateStuffs} />
         ))}
       </div>
     );
   }
 }
 
-function MovieDetails({ movie }) {
+function MovieDetails(props) {
+  console.log('in moviedetails', props)
   return (
-    <Link to={`/movies/${movie.id}`}>
-      <MovieCard movie={movie} />
+    <Link to={`/movies/${props.movie.id}`}>
+      <MovieCard {...props} />
     </Link>
   );
 }
